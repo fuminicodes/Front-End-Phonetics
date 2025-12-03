@@ -2,6 +2,7 @@
 'use client';
 
 import { useAudioRecorder } from '@/hooks/useAudioRecorder';
+import { AudioPlayer } from 'react-wave-audio-player';
 
 interface AudioRecorderProps {
   onRecordingComplete: (audioBlob: Blob) => void;
@@ -63,8 +64,23 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
           {audioBlob && audioUrl && (
             <div className="space-y-4">
               <div className="bg-green-50 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-green-800 mb-2">Recording Complete</h3>
-                <audio controls src={audioUrl} className="w-full" />
+                <h3 className="text-lg font-semibold text-green-800 mb-4">Recording Complete</h3>
+                <div className="w-full">
+                  <AudioPlayer
+                    src={audioUrl}
+                    waveColor="#a3aed0"
+                    progressColor="#059669"
+                    cursorColor="#059669"
+                    buttonsColor="#059669"
+                    barWidth={2}
+                    barRadius={2}
+                    barGap={1}
+                    height={80}
+                    className="bg-white border border-green-200 rounded-lg shadow-sm"
+                    onPlay={() => console.log('Audio started playing')}
+                    onPause={() => console.log('Audio paused')}
+                  />
+                </div>
               </div>
               
               <div className="flex space-x-4 justify-center">

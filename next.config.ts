@@ -30,10 +30,6 @@ const nextConfig: NextConfig = {
   },
   // External packages configuration
   serverExternalPackages: [],
-  // Development configuration
-  devIndicators: {
-    appIsrStatus: false,
-  },
 };
 
 export default nextConfig;
