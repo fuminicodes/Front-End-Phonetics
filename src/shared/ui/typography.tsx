@@ -41,7 +41,7 @@ const Typography: React.FC<TypographyProps> = ({
       className: cn(
         variants[variant],
         weights[weight],
-        glass && 'glass-text',
+        glass ? 'glass-text text-accent-primary dark:text-light-base' : 'text-accent-primary dark:text-light-base',
         // Spacing bottom para headings
         ['h1', 'h2', 'h3', 'h4'].includes(variant) && 'mb-4',
         variant === 'p' && 'mb-2',

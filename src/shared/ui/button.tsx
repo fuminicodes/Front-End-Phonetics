@@ -12,13 +12,13 @@ const buttonVariants = cva(
         solid: "bg-primary-500 text-white shadow-lg hover:bg-primary-600 hover:shadow-xl dark:shadow-primary-500/25",
         
         // Glass - Efecto glassmorphism para acciones secundarias
-        glass: "glass-panel glass-text backdrop-blur-[12px] border hover:shadow-glass-hover",
+        glass: "glass-panel glass-text backdrop-blur-[12px] border hover:shadow-glass-hover text-accent-primary dark:text-light-base",
         
         // Ghost - Minimalista para navegación
-        ghost: "hover:glass-light dark:hover:glass-dark glass-text",
+        ghost: "hover:glass-light dark:hover:glass-dark glass-text text-accent-primary dark:text-light-base",
         
         // Outline - Bordes definidos
-        outline: "border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white",
+        outline: "border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white dark:hover:text-white",
         
         // Destructive - Para acciones peligrosas
         destructive: "bg-danger-500 text-white hover:bg-danger-700 shadow-lg",
