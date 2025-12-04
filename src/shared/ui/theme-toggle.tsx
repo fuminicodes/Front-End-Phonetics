@@ -5,10 +5,11 @@ import { Button } from '@/shared/ui/button'
 import { useTheme } from '@/shared/providers/theme-provider'
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { effectiveTheme, setTheme } = useTheme()
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    // Switch between light and dark directly, not system
+    setTheme(effectiveTheme === 'dark' ? 'light' : 'dark')
   }
 
   return (
@@ -19,7 +20,7 @@ export function ThemeToggle() {
       className="fixed top-4 right-4 z-50"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? '☀️' : '🌙'}
+      {effectiveTheme === 'dark' ? '☀️' : '🌙'}
     </Button>
   )
 }
