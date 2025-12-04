@@ -1,35 +1,55 @@
-import * as React from 'react';
-import { clsx } from 'clsx';
+import React from 'react'
+import { type VariantProps, cva } from 'class-variance-authority'
+import { cn } from '@/shared/utils/cn'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
-  loading?: boolean;
+const buttonVariants = cva(
+  // Base styles - común para todas las variantes
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
+  {
+    variants: {
+      variant: {
+        // Solid - CTA principal sin glassmorphism para máximo impacto
+        solid: "bg-primary-500 text-white shadow-lg hover:bg-primary-600 hover:shadow-xl dark:shadow-primary-500/25",
+        
+        // Glass - Efecto glassmorphism para acciones secundarias
+        glass: "glass-panel glass-text backdrop-blur-[12px] border hover:shadow-glass-hover",
+        
+        // Ghost - Minimalista para navegación
+        ghost: "hover:glass-light dark:hover:glass-dark glass-text",
+        
+        // Outline - Bordes definidos
+        outline: "border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white",
+        
+        // Destructive - Para acciones peligrosas
+        destructive: "bg-danger-500 text-white hover:bg-danger-700 shadow-lg",
+      },
+      size: {
+        sm: "h-9 rounded-[1rem] px-3 text-xs",
+        md: "h-10 rounded-[1rem] px-4 py-2",
+        lg: "h-12 rounded-[1.5rem] px-6 py-3 text-base",
+        xl: "h-14 rounded-[2rem] px-8 py-4 text-lg",
+        icon: "h-10 w-10 rounded-[1rem]",
+      },
+    },
+    defaultVariants: {
+      variant: "solid",
+      size: "md",
+    },
+  }
+)
+
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  loading?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', loading = false, children, disabled, ...props }, ref) => {
-    const baseClasses = 'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
-    
-    const variants = {
-      default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-      destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-      outline: 'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-      secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-      ghost: 'hover:bg-accent hover:text-accent-foreground',
-      link: 'text-primary underline-offset-4 hover:underline',
-    };
-    
-    const sizes = {
-      default: 'h-9 px-4 py-2',
-      sm: 'h-8 rounded-md px-3 text-xs',
-      lg: 'h-10 rounded-md px-8',
-      icon: 'h-9 w-9',
-    };
-    
+  ({ className, variant, size, asChild = false, loading = false, children, disabled, ...props }, ref) => {
     return (
       <button
-        className={clsx(baseClasses, variants[variant], sizes[size], className)}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         disabled={disabled || loading}
         {...props}
@@ -58,10 +78,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {children}
       </button>
-    );
+    )
   }
-);
+)
 
-Button.displayName = 'Button';
+Button.displayName = "Button"
 
-export { Button, type ButtonProps };
+export { Button, buttonVariants }
+export type { ButtonProps }

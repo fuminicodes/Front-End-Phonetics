@@ -6,6 +6,8 @@ export { Alert, AlertDescription } from './alert';
 export { Skeleton } from './skeleton';
 export { ErrorBoundary } from './error-boundary';
 export { FeatureFlagWrapper } from './feature-flag-wrapper';
+export { Typography } from './typography';
+export { BackgroundWrapper } from './background-wrapper';
 
 // Component types
 export type { ButtonProps } from './button';

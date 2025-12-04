@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
+/* Variables CSS personalizadas para glassmorphism */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-bg-light-hover: rgba(255, 255, 255, 0.15);
+  --glass-border-light: rgba(255, 255, 255, 0.1);
+  --glass-shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+  
+  --glass-bg-dark: rgba(255, 255, 255, 0.05);
+  --glass-bg-dark-hover: rgba(255, 255, 255, 0.08);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --glass-shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* Base Colors */
+  --color-light-base: #f1e4f0;
+  --color-dark-base: #4f368d;
+  --color-dark-deep: #1a102e;
+  
+  /* Brand Colors */
+  --color-primary-50: #e6f4ff;
+  --color-primary-100: #bae7ff;
+  --color-primary-200: #7dd3ff;
+  --color-primary-300: #47bdff;
+  --color-primary-400: #1fa7ff;
+  --color-primary-500: #007cff;
+  --color-primary-600: #0056b3;
+  --color-primary-700: #003d80;
+  --color-primary-800: #002852;
+  --color-primary-900: #001829;
+  
+  /* Accent Colors */
+  --color-accent-primary: #3f2378;
+  --color-accent-secondary: #9858ca;
+  --color-accent-tertiary: #cca5eb;
+  
+  /* Status Colors */
+  --color-success-50: #e8f5e8;
+  --color-success-500: #00b064;
+  --color-success-700: #2e7d32;
+  --color-warning-50: #fffbf0;
+  --color-warning-500: #e6ce00;
+  --color-warning-700: #f57c00;
+  --color-danger-50: #ffebee;
+  --color-danger-500: #f81600;
+  --color-danger-700: #d32f2f;
+  
+  /* Glass System Colors */
+  --color-glass-light: rgba(255, 255, 255, 0.1);
+  --color-glass-light-hover: rgba(255, 255, 255, 0.15);
+  --color-glass-dark: rgba(255, 255, 255, 0.05);
+  --color-glass-dark-hover: rgba(255, 255, 255, 0.08);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-dark: rgba(255, 255, 255, 0.08);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  /* Box Shadows */
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-glass-hover: 0 12px 48px rgba(0, 0, 0, 0.15);
+  --shadow-glass-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glass-dark-hover: 0 12px 48px rgba(0, 0, 0, 0.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility glass-panel {
+  position: relative;
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+  background: var(--color-glass-light);
+  box-shadow: var(--shadow-glass);
+  border-radius: 1rem;
+  transition: all 0.3s ease-out;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    background: var(--color-glass-light-hover);
+    box-shadow: var(--shadow-glass-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 }
 
+@utility glass-panel {
+  .dark & {
+    background: var(--color-glass-dark);
+    box-shadow: var(--shadow-glass-dark);
+    border-color: var(--color-glass-border-dark);
+    
+    &:hover {
+      background: var(--color-glass-dark-hover);
+      box-shadow: var(--shadow-glass-dark-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    &::before {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    }
+  }
+}
+
+@utility glass-light {
+  @apply glass-panel;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@utility glass-dark {
+  @apply glass-panel;
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.05);
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@utility glass-input {
+  @apply glass-panel;
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(255, 255, 255, 0.1);
+  
+  .dark & {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(255, 255, 255, 0.05);
+  }
+  
+  &:focus {
+    border-color: rgba(0, 124, 255, 0.5);
+    box-shadow: 0 0 0 2px rgba(0, 124, 255, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@utility glass-text {
+  color: var(--color-accent-primary);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+  .dark & {
+    color: var(--color-light-base);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Animación floating para orbes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-5px) rotate(-1deg); }
+  75% { transform: translateY(-15px) rotate(0.5deg); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) rotate(-0.5deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+  75% { transform: translateY(-12px) rotate(-1deg); }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+/* Gradient radial utility */
+@utility bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed {
+    animation: none;
+  }
+  
+  .glass-panel,
+  .glass-input {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-panel {
+    border: 2px solid var(--color-accent-primary);
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.95);
+  }
+  
+  .dark .glass-panel {
+    border-color: var(--color-light-base);
+    background: rgba(0, 0, 0, 0.85);
+  }
+}
+
+/* Ambient background base */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-light-base);
+  color: var(--color-accent-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-sans);
+}
+
+.dark body {
+  background: var(--color-dark-deep);
+  color: var(--color-light-base);
 }
