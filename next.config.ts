@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
             value: 'nosniff'
           },
           {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
             key: 'Cache-Control',
             value: 'no-cache, no-store, must-revalidate'
           },
@@ -28,11 +36,27 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Rewrites for development mocking (only when USE_MOCKS=true)
+  async rewrites() {
+    if (process.env.NODE_ENV === 'development' && process.env.USE_MOCKS === 'true') {
+      return [
+        {
+          source: '/api/phoneme-analysis/:path*',
+          destination: '/api/mocked/phoneme-analysis/:path*',
+        },
+      ];
+    }
+    return [];
+  },
+  
   // External packages configuration
   serverExternalPackages: [],
-  // Development configuration
-  devIndicators: {
-    appIsrStatus: false,
+  
+  // Development configuration - removed invalid devIndicators config
+  
+  // Enable experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['@tanstack/react-query', 'jose', 'zod'],
   },
 };
 

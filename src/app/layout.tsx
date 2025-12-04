@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AppProviders } from "@/core/providers/app-providers";
+import { ErrorBoundary } from "@/shared/ui/error-boundary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Phonetics Analyzer",
-  description: "Audio recording and phoneme analysis tool for speech processing",
+  description: "Audio recording and phoneme analysis tool for speech processing - Next.js BFF Architecture",
 };
 
 export default function RootLayout({
@@ -27,7 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ErrorBoundary level="page">
+          <AppProviders>
+            {children}
+          </AppProviders>
+        </ErrorBoundary>
       </body>
     </html>
   );

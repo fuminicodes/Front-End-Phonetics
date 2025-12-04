@@ -1,3 +1,5 @@
+'use client';
+
 // Custom hook for audio recording
 import { useState, useRef, useCallback } from 'react';
 
