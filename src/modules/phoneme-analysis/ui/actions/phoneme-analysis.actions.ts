@@ -5,6 +5,7 @@ import { AnalyzeAudioUseCase } from '../../domain/use-cases/analyze-audio.use-ca
 import { PhonemeAnalysisRepositoryImpl } from '../../infrastructure/repositories/phoneme-analysis.repository.impl';
 import { logger } from '@/core/logging/logger';
 import { CorrelationManager } from '@/core/logging/correlation';
+import { checkResourceAccess } from '@/shared/hooks/use-permission';
 
 const AnalyzeAudioFormSchema = z.object({
   targetLanguage: z.string().optional(),
@@ -39,6 +40,18 @@ export async function analyzeAudioAction(
   const correlationId = CorrelationManager.generate();
   
   try {
+    // Check permissions first (RBAC)
+    const hasPermission = await checkResourceAccess('phoneme', 'analyze');
+    if (!hasPermission) {
+      logger.warn('Permission denied for phoneme analysis', { correlationId });
+      return {
+        errors: {
+          _form: ['No tienes permisos para realizar análisis de fonemas'],
+        },
+        success: false,
+      };
+    }
+    
     // Validate form data
     const validatedFields = AnalyzeAudioFormSchema.safeParse({
       targetLanguage: formData.get('targetLanguage'),

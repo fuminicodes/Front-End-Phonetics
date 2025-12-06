@@ -9,6 +9,7 @@ export { FeatureFlagWrapper } from './feature-flag-wrapper';
 export { Typography } from './typography';
 export { BackgroundWrapper } from './background-wrapper';
 export { UserMenu } from './user-menu';
+export { Can, Cannot, withPermission } from './can';
 
 // Component types
 export type { ButtonProps } from './button';
