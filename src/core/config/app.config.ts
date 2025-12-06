@@ -32,8 +32,8 @@ function getDefaultConfig(): EnvConfig {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'default-secret-for-development-only',
     API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3001',
     PHONEME_ANALYSIS_API_URL: process.env.PHONEME_ANALYSIS_API_URL || 'http://localhost:3002',
-    SESSION_ENCRYPTION_KEY: process.env.SESSION_ENCRYPTION_KEY || 'development-key-32-characters-long',
-    JWT_SECRET: process.env.JWT_SECRET || 'development-jwt-secret-32-chars-long',
+    SESSION_ENCRYPTION_KEY: process.env.SESSION_ENCRYPTION_KEY || '12345678901234567890123456789012', // 32 chars
+    JWT_SECRET: process.env.JWT_SECRET || 'abcdefghijklmnopqrstuvwxyz123456', // 32 chars
     FF_NEW_PHONEME_ANALYSIS: process.env.FF_NEW_PHONEME_ANALYSIS || 'false',
     FF_ADVANCED_ANALYTICS: process.env.FF_ADVANCED_ANALYTICS || 'false',
     FF_MAINTENANCE_MODE: process.env.FF_MAINTENANCE_MODE || 'false',

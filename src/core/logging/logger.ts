@@ -29,6 +29,9 @@ interface LogContext {
   total?: number;
   statusText?: string;
   errorDetails?: string;
+  // Authentication context fields
+  email?: string;
+  reason?: string;
 }
 
 class Logger {

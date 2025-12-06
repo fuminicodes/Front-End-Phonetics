@@ -15,7 +15,11 @@ const SessionDataSchema = z.object({
 export type SessionData = z.infer<typeof SessionDataSchema>;
 
 export class SessionManager {
-  private static COOKIE_NAME = '__Secure-session';
+  // Use __Secure- prefix only in production (HTTPS required)
+  // In development, use regular name to avoid browser warnings
+  private static COOKIE_NAME = process.env.NODE_ENV === 'production' 
+    ? '__Secure-session' 
+    : 'session';
   
   static async setSession(data: SessionData): Promise<void> {
     try {

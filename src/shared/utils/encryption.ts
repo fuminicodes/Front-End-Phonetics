@@ -1,9 +1,13 @@
 import { EncryptJWT, jwtDecrypt } from 'jose';
 import { appConfig } from '@/core/config/app.config';
 
+// Default 32-byte keys for development (exactly 256 bits for A256GCM)
+const DEFAULT_JWT_SECRET = 'abcdefghijklmnopqrstuvwxyz123456';
+const DEFAULT_SESSION_SECRET = '12345678901234567890123456789012';
+
 // Convert string to Uint8Array for jose
-const JWT_SECRET = new TextEncoder().encode(appConfig.JWT_SECRET!);
-const SESSION_SECRET = new TextEncoder().encode(appConfig.SESSION_ENCRYPTION_KEY!);
+const JWT_SECRET = new TextEncoder().encode(appConfig.JWT_SECRET || DEFAULT_JWT_SECRET);
+const SESSION_SECRET = new TextEncoder().encode(appConfig.SESSION_ENCRYPTION_KEY || DEFAULT_SESSION_SECRET);
 
 /**
  * Encrypts data using JWE (JSON Web Encryption)
