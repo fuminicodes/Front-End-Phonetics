@@ -1,4 +1,8 @@
 import { setupWorker } from 'msw/browser';
 import { phonemeAnalysisHandlers } from './handlers/phoneme-analysis.handlers';
+import { authHandlers } from './handlers/auth.handlers';
 
-export const worker = setupWorker(...phonemeAnalysisHandlers);
+// Combine all handlers
+const handlers = [...phonemeAnalysisHandlers, ...authHandlers];
+
+export const worker = setupWorker(...handlers);

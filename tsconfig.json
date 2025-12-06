@@ -22,7 +22,8 @@
       "@/*": ["./src/*"],
       "@/core/*": ["./src/core/*"],
       "@/shared/*": ["./src/shared/*"],
-      "@/modules/*": ["./src/modules/*"]
+      "@/modules/*": ["./src/modules/*"],
+      "@/mocks/*": ["./mocks/*"]
     }
   },
   "include": [
