@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
+  // ⚠️ DEPRECATION WARNING
+  console.warn('⚠️ DEPRECATED API ROUTE USED: /api/phoneme-analysis-alt');
+  console.warn('⚠️ Please migrate to Server Action: analyzeAudioDirectAction()');
+  console.warn('⚠️ See: src/modules/phoneme-analysis/ui/actions/phoneme-analysis.actions.ts');
+  console.warn('⚠️ This route will be removed in a future version.');
+  
   try {
     console.log('🔄 Alternative proxy received request for phoneme analysis');
 

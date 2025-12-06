@@ -4,7 +4,11 @@ import { logger } from '@/core/logging/logger';
 import { SessionManager } from '@/shared/utils/session';
 import { verifyJWT } from '@/shared/utils/encryption';
 
-export async function middleware(request: NextRequest) {
+/**
+ * Next.js 16 Proxy (formerly Middleware)
+ * Handles request interception, session validation, and logging
+ */
+export async function proxy(request: NextRequest) {
   const correlationId = CorrelationManager.generate();
   const startTime = Date.now();
   const pathname = request.nextUrl.pathname;

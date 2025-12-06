@@ -2,6 +2,26 @@
 
 A Next.js application for recording audio and analyzing phoneme patterns using advanced speech processing technology.
 
+## ⚡ Recent Updates
+
+### ✅ Migration to Server Actions (December 2024)
+
+All API Routes have been migrated to **Server Actions** following Next.js 16 best practices and Clean Architecture patterns.
+
+**New Pages Available:**
+- `/proxy-test-sa` - Server Action basic test
+- `/comparison-sa` - Standard vs Direct Action comparison
+- `/debug-sa` - Debug action with detailed logging
+
+**Documentation:**
+- [Migration Guide](./documentation/MIGRATION_API_ROUTES_TO_SERVER_ACTIONS.md) - Complete migration documentation
+- [Architecture Guide](./documentation/GUIDE_ARCHITECTURE.md) - Project architecture standards
+
+**Deprecated API Routes:**
+- ⚠️ `/api/phoneme-analysis` → Use `analyzeAudioAction()`
+- ⚠️ `/api/phoneme-analysis-alt` → Use `analyzeAudioDirectAction()`
+- ⚠️ `/api/debug-proxy` → Use `analyzeAudioDebugAction()`
+
 ## Features
 
 - **Audio Recording**: Browser-based audio recording with high-quality capture

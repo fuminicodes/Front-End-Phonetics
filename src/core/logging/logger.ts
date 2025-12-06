@@ -32,6 +32,13 @@ interface LogContext {
   // Authentication context fields
   email?: string;
   reason?: string;
+  // Debug context fields
+  formDataEntries?: any[];
+  externalFormDataEntries?: any[];
+  externalApiData?: any;
+  availableKeys?: string[];
+  fileType?: string;
+  errorBody?: string;
 }
 
 class Logger {
