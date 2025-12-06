@@ -1,5 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+/**
+ * @deprecated This API Route is deprecated in favor of Server Actions.
+ * 
+ * MIGRATION NOTICE:
+ * This endpoint is being phased out as part of the architecture migration to Server Actions.
+ * 
+ * USE INSTEAD:
+ * - Server Action: src/modules/phoneme-analysis/ui/actions/phoneme-analysis.actions.ts
+ * - Function: analyzeAudioAction(prevState, formData)
+ * 
+ * REASON FOR DEPRECATION:
+ * Following the architecture guide (GUIDE_ARCHITECTURE.md Section 4.5):
+ * - Server Actions provide better type safety
+ * - Native form integration without API calls
+ * - Automatic error handling and validation
+ * - Progressive enhancement support
+ * 
+ * This file is kept temporarily for backward compatibility but should not be used
+ * in new code. All logic has been moved to:
+ * - Repository: src/modules/phoneme-analysis/infrastructure/repositories/phoneme-analysis.repository.impl.ts
+ * - Use Case: src/modules/phoneme-analysis/domain/use-cases/analyze-audio.use-case.ts
+ * - Server Action: src/modules/phoneme-analysis/ui/actions/phoneme-analysis.actions.ts
+ * 
+ * TO BE REMOVED: After confirming all clients are using Server Actions (target: Q1 2026)
+ */
+
 export async function POST(request: NextRequest) {
   try {
     // Log the request for debugging

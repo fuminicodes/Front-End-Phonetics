@@ -22,6 +22,7 @@ export class PhonemeAnalysisRepositoryImpl implements PhonemeAnalysisRepository 
 
       // Create FormData for the external API
       const formData = new FormData();
+      // Note: External API expects 'audioFile' field name
       formData.append('audioFile', audioFile);
       
       // Add optional parameters if provided
@@ -37,9 +38,12 @@ export class PhonemeAnalysisRepositoryImpl implements PhonemeAnalysisRepository 
 
       const headers = await CorrelationManager.getHeaders();
 
-      const response = await fetch(`${this.baseURL}${phoneAnalysisApiConfig.endpoints.analyze}`, {
+      // Call external phoneme analysis API directly
+      const apiUrl = 'http://localhost:5005/api/PhonemeRecognition/analyze-v';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
+        // Don't set Content-Type manually for FormData
         headers: headers as HeadersInit
       });
 
@@ -52,7 +56,7 @@ export class PhonemeAnalysisRepositoryImpl implements PhonemeAnalysisRepository 
           errorDetails: errorText
         });
         
-        throw new Error(`Analysis API error: ${response.status} ${response.statusText}`);
+        throw new Error(`External API error: ${response.status} ${response.statusText}. Details: ${errorText}`);
       }
 
       const data = await response.json();
@@ -72,6 +76,14 @@ export class PhonemeAnalysisRepositoryImpl implements PhonemeAnalysisRepository 
         correlationId,
         fileName: audioFile.name
       });
+      
+      // Check for connection errors
+      if (error instanceof Error) {
+        if (error.message.includes('ECONNREFUSED') || error.message.includes('fetch failed')) {
+          throw new Error('Cannot connect to phoneme analysis API. Make sure the service is running on http://localhost:5005');
+        }
+      }
+      
       throw error;
     }
   }

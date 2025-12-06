@@ -106,9 +106,20 @@ export async function analyzeAudioAction(
       action: 'analyze_audio',
     });
     
-    const errorMessage = error instanceof Error 
-      ? error.message 
-      : 'An unexpected error occurred during analysis';
+    let errorMessage = 'An unexpected error occurred during analysis';
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      
+      // Provide user-friendly error messages
+      if (error.message.includes('Cannot connect to phoneme analysis API')) {
+        errorMessage = 'The audio analysis service is currently unavailable. Please try again later.';
+      } else if (error.message.includes('Invalid audio file format')) {
+        errorMessage = 'Invalid audio format. Please use MP3, WAV, OGG, or M4A files.';
+      } else if (error.message.includes('too large')) {
+        errorMessage = 'Audio file is too large. Maximum size is 10MB.';
+      }
+    }
     
     return {
       errors: {
