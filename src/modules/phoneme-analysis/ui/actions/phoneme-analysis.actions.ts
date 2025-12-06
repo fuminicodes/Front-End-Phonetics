@@ -5,7 +5,7 @@ import { AnalyzeAudioUseCase } from '../../domain/use-cases/analyze-audio.use-ca
 import { PhonemeAnalysisRepositoryImpl } from '../../infrastructure/repositories/phoneme-analysis.repository.impl';
 import { logger } from '@/core/logging/logger';
 import { CorrelationManager } from '@/core/logging/correlation';
-import { checkResourceAccess } from '@/shared/hooks/use-permission';
+import { checkResourceAccess } from '@/shared/hooks/use-permission.server';
 
 const AnalyzeAudioFormSchema = z.object({
   targetLanguage: z.string().optional(),

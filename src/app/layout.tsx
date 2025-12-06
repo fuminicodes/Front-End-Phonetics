@@ -6,6 +6,7 @@ import { ErrorBoundary } from "@/shared/ui/error-boundary";
 import { BackgroundWrapper } from "@/shared/ui/background-wrapper";
 import { PermissionsProvider } from "@/shared/providers/permissions-provider";
 import { SessionManager } from "@/shared/utils/session";
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,15 +32,17 @@ export default async function RootLayout({
       <body className="antialiased" suppressHydrationWarning>
         <ErrorBoundary level="page">
           <AppProviders>
-            <PermissionsProvider 
-              permissions={session?.permissions || []}
-              userId={session?.userId}
-              email={session?.email}
-            >
-              <BackgroundWrapper variant="default">
-                {children}
-              </BackgroundWrapper>
-            </PermissionsProvider>
+            <NuqsAdapter>
+              <PermissionsProvider 
+                permissions={session?.permissions || []}
+                userId={session?.userId}
+                email={session?.email}
+              >
+                <BackgroundWrapper variant="default">
+                  {children}
+                </BackgroundWrapper>
+              </PermissionsProvider>
+            </NuqsAdapter>
           </AppProviders>
         </ErrorBoundary>
       </body>

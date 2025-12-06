@@ -208,7 +208,7 @@ import {
   checkAnyPermission,
   checkAllPermissions,
   getUserPermissions
-} from '@/shared/hooks/use-permission';
+} from '@/shared/hooks/use-permission.server';
 
 export async function deleteUserAction(userId: string) {
   // Verificar permiso simple
@@ -518,7 +518,8 @@ const superAdminPermissions = [
 
 ## Referencias
 
-- **Hook**: `src/shared/hooks/use-permission.ts`
+- **Client Hook**: `src/shared/hooks/use-permission.ts`
+- **Server Functions**: `src/shared/hooks/use-permission.server.ts`
 - **Components**: `src/shared/ui/can.tsx`
 - **Provider**: `src/shared/providers/permissions-provider.tsx`
 - **Session**: `src/shared/utils/session.ts`
