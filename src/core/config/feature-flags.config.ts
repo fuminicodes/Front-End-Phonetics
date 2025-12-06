@@ -20,9 +20,9 @@ export async function getFeatureFlags(): Promise<FeatureFlags> {
     
     // Development defaults from environment variables
     return {
-      NEW_PHONEME_ANALYSIS: appConfig.FF_NEW_PHONEME_ANALYSIS === 'true',
-      ADVANCED_ANALYTICS: appConfig.FF_ADVANCED_ANALYTICS === 'true',
-      MAINTENANCE_MODE: appConfig.FF_MAINTENANCE_MODE === 'true',
+      NEW_PHONEME_ANALYSIS: appConfig.FF_NEW_PHONEME_ANALYSIS,
+      ADVANCED_ANALYTICS: appConfig.FF_ADVANCED_ANALYTICS,
+      MAINTENANCE_MODE: appConfig.FF_MAINTENANCE_MODE,
     };
   } catch (error) {
     console.error('Error loading feature flags:', error);
