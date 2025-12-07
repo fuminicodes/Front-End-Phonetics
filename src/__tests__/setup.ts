@@ -2,8 +2,10 @@ import '@testing-library/jest-dom';
 import { expect, afterEach, beforeAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import { webcrypto } from 'node:crypto';
+import { toHaveNoViolations } from 'jest-axe';
 
-// Polyfill Web Crypto API for jose library
+// Extend Vitest matchers with jest-axe
+expect.extend(toHaveNoViolations);
 if (!globalThis.crypto) {
   Object.defineProperty(globalThis, 'crypto', {
     value: webcrypto,

@@ -36,6 +36,10 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
     return (
       <div
         ref={ref}
+        role="status"
+        aria-live="polite"
+        aria-busy="true"
+        aria-label="Cargando..."
         className={cn(skeletonVariants({ variant, className }))}
         {...props}
       />
