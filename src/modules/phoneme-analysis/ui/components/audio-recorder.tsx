@@ -3,7 +3,7 @@
 import { useAudioRecorder } from '@/shared/hooks/use-audio-recorder';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/ui/card';
-import { Alert, AlertDescription } from '@/shared/ui/alert';
+import { Alert, AlertTitle, AlertDescription } from '@/shared/ui/alert';
 import { ErrorBoundary } from '@/shared/ui/error-boundary';
 import { Typography } from '@/shared/ui/typography';
 
@@ -125,11 +125,9 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
         {/* Error Display */}
         {error && (
           <Alert variant="destructive">
+            <AlertTitle>⚠️ Recording Error</AlertTitle>
             <AlertDescription>
-              <div>
-                <Typography variant="p" className="font-semibold">Recording Error:</Typography>
-                <Typography variant="p">{error}</Typography>
-              </div>
+              {error}
             </AlertDescription>
           </Alert>
         )}
