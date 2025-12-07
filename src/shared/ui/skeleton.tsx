@@ -1,15 +1,48 @@
 import * as React from 'react';
-import { clsx } from 'clsx';
+import { cn } from '@/shared/utils/cn';
+import { type VariantProps, cva } from 'class-variance-authority';
 
-interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {}
+const skeletonVariants = cva(
+  // Base styles - glassmorphism loading effect
+  "animate-pulse rounded-glass backdrop-blur-sm transition-all duration-300",
+  {
+    variants: {
+      variant: {
+        // Glass - Glassmorphism effect (default)
+        glass: "bg-glass-light dark:bg-glass-dark border border-glass-border dark:border-glass-border-dark",
+        
+        // Solid - More visible loading state
+        solid: "bg-accent-primary/10 dark:bg-light-base/10",
+        
+        // Light - Subtle loading state
+        light: "bg-white/20 dark:bg-white/5",
+        
+        // Shimmer - Animated gradient effect
+        shimmer: "bg-gradient-to-r from-glass-light via-white/30 to-glass-light dark:from-glass-dark dark:via-white/10 dark:to-glass-dark bg-[length:200%_100%] animate-shimmer",
+      },
+    },
+    defaultVariants: {
+      variant: "glass",
+    },
+  }
+);
 
-function Skeleton({ className, ...props }: SkeletonProps) {
-  return (
-    <div
-      className={clsx('animate-pulse rounded-md bg-muted', className)}
-      {...props}
-    />
-  );
-}
+export interface SkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof skeletonVariants> {}
 
-export { Skeleton };
+const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
+  ({ className, variant, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(skeletonVariants({ variant, className }))}
+        {...props}
+      />
+    );
+  }
+);
+
+Skeleton.displayName = "Skeleton";
+
+export { Skeleton, skeletonVariants };

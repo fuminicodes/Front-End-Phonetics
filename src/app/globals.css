@@ -201,6 +201,16 @@
   animation: float-delayed 8s ease-in-out infinite;
 }
 
+/* Shimmer animation for Skeleton component */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@utility animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
 /* Gradient radial utility */
 @utility bg-gradient-radial {
   background-image: radial-gradient(circle, var(--tw-gradient-stops));
@@ -209,7 +219,8 @@
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
-  .animate-float-delayed {
+  .animate-float-delayed,
+  .animate-shimmer {
     animation: none;
   }
   

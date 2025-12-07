@@ -29,9 +29,9 @@ export const AnalysisResults: React.FC<AnalysisResultsProps> = ({
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
             <p className="text-blue-600">Processing your recording...</p>
             <div className="space-y-2 max-w-md mx-auto">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-3/4 mx-auto" />
-              <Skeleton className="h-4 w-1/2 mx-auto" />
+              <Skeleton variant="shimmer" className="h-4 w-full" />
+              <Skeleton variant="shimmer" className="h-4 w-3/4 mx-auto" />
+              <Skeleton variant="shimmer" className="h-4 w-1/2 mx-auto" />
             </div>
           </div>
         </CardContent>

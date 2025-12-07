@@ -15,3 +15,4 @@ export { Can, Cannot, withPermission } from './can';
 export type { ButtonProps } from './button';
 export type { InputProps } from './input';
 export type { AlertProps } from './alert';
+export type { SkeletonProps } from './skeleton';
