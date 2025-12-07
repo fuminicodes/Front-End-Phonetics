@@ -103,8 +103,13 @@ function validateEnv(): EnvConfig {
  * Uses environment variables if provided, otherwise falls back to defaults
  */
 function getDevConfig(): EnvConfig {
+  const nodeEnv = process.env.NODE_ENV;
+  const validNodeEnv = ['development', 'staging', 'production'].includes(nodeEnv || '')
+    ? (nodeEnv as 'development' | 'staging' | 'production')
+    : 'development';
+  
   const config = {
-    NODE_ENV: (process.env.NODE_ENV || 'development') as 'development' | 'staging' | 'production',
+    NODE_ENV: validNodeEnv,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || 'dev-secret-change-in-production-min-32-chars',
     SESSION_ENCRYPTION_KEY: process.env.SESSION_ENCRYPTION_KEY || '12345678901234567890123456789012', // 32 chars
     JWT_SECRET: process.env.JWT_SECRET || 'dev-jwt-secret-change-in-prod-32', // 32 chars
@@ -115,13 +120,23 @@ function getDevConfig(): EnvConfig {
     FF_MAINTENANCE_MODE: process.env.FF_MAINTENANCE_MODE || 'false',
   };
   
-  // Validate even in development to catch schema issues early
+  // Validate and transform to get proper types (booleans for feature flags)
   const result = envSchema.safeParse(config);
   
   if (!result.success) {
     console.warn('⚠️  Development config validation warning:', result.error.format());
-    // Return the config anyway in development to allow the app to run
-    return envSchema.parse(config);
+    // Force parse to get the transformed types even if validation failed
+    try {
+      return envSchema.parse(config);
+    } catch {
+      // Last resort fallback with manual transformation
+      return {
+        ...config,
+        FF_NEW_PHONEME_ANALYSIS: config.FF_NEW_PHONEME_ANALYSIS === 'true',
+        FF_ADVANCED_ANALYTICS: config.FF_ADVANCED_ANALYTICS === 'true',
+        FF_MAINTENANCE_MODE: config.FF_MAINTENANCE_MODE === 'true',
+      };
+    }
   }
   
   return result.data;

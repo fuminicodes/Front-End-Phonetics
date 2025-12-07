@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "validate:env": "node scripts/validate-env.js",
-    "prebuild": "npm run validate:env"
+    "prebuild": "npm run validate:env",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.12",
@@ -23,18 +27,23 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/ui": "^4.0.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "^9",
     "eslint-config-next": "16.0.4",
+    "jsdom": "^27.2.0",
     "lucide-react": "^0.555.0",
     "msw": "^2.12.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.15"
   },
   "msw": {
     "workerDirectory": [
