@@ -10,9 +10,11 @@ export { Typography } from './typography';
 export { BackgroundWrapper } from './background-wrapper';
 export { UserMenu } from './user-menu';
 export { Can, Cannot, withPermission } from './can';
+export { SkipLinks } from './skip-links';
 
 // Component types
 export type { ButtonProps } from './button';
 export type { InputProps } from './input';
 export type { AlertProps } from './alert';
 export type { SkeletonProps } from './skeleton';
+export type { SkipLinksProps, SkipLink } from './skip-links';

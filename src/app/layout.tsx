@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppProviders } from "@/core/providers/app-providers";
 import { ErrorBoundary } from "@/shared/ui/error-boundary";
 import { BackgroundWrapper } from "@/shared/ui/background-wrapper";
+import { SkipLinks } from "@/shared/ui/skip-links";
 import { PermissionsProvider } from "@/shared/providers/permissions-provider";
 import { SessionManager } from "@/shared/utils/session";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
@@ -30,6 +31,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
+        <SkipLinks />
         <ErrorBoundary level="page">
           <AppProviders>
             <NuqsAdapter>
@@ -39,7 +41,9 @@ export default async function RootLayout({
                 email={session?.email}
               >
                 <BackgroundWrapper variant="default">
-                  {children}
+                  <main id="main-content" tabIndex={-1}>
+                    {children}
+                  </main>
                 </BackgroundWrapper>
               </PermissionsProvider>
             </NuqsAdapter>
