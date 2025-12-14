@@ -6,6 +6,8 @@ import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 const SessionDataSchema = z.object({
   userId: z.string(),
   email: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
   accessToken: z.string(),
   refreshToken: z.string().optional(),
   expiresAt: z.number(),

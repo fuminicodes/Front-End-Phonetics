@@ -8,6 +8,7 @@ import { SkipLinks } from "@/shared/ui/skip-links";
 import { PermissionsProvider } from "@/shared/providers/permissions-provider";
 import { SessionManager } from "@/shared/utils/session";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Header } from "@/shared/ui/header";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default async function RootLayout({
                 userId={session?.userId}
                 email={session?.email}
               >
+                <Header />
                 <BackgroundWrapper variant="default">
                   <main id="main-content" tabIndex={-1}>
                     {children}

@@ -112,6 +112,8 @@ export async function loginAction(
     await SessionManager.setSession({
       userId: authResponse.user.id,
       email: authResponse.user.email,
+      firstName: authResponse.user.firstName,
+      lastName: authResponse.user.lastName,
       accessToken: internalJWT,
       refreshToken: authResponse.refreshToken,
       expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000), // 7 days
@@ -217,6 +219,8 @@ export async function registerAction(
     await SessionManager.setSession({
       userId: registerResponse.user.id,
       email: registerResponse.user.email,
+      firstName: registerResponse.user.firstName,
+      lastName: registerResponse.user.lastName,
       accessToken: internalJWT,
       refreshToken: registerResponse.refreshToken,
       expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000),
@@ -261,13 +265,20 @@ export async function logoutAction(): Promise<void> {
     
     await SessionManager.clearSession();
     
+    await logger.info('Logout successful', {
+      correlationId,
+      action: 'logout',
+    });
+    
   } catch (error) {
     await logger.error('Logout error', error as Error, {
       correlationId,
       action: 'logout',
     });
+    // Continue to redirect even if there's an error
   }
   
+  // Redirect must be outside try-catch (Next.js requirement)
   redirect('/login');
 }
 

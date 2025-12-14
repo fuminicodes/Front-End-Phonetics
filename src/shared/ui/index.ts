@@ -9,6 +9,7 @@ export { FeatureFlagWrapper } from './feature-flag-wrapper';
 export { Typography } from './typography';
 export { BackgroundWrapper } from './background-wrapper';
 export { UserMenu } from './user-menu';
+export { Header } from './header';
 export { Can, Cannot, withPermission } from './can';
 export { SkipLinks } from './skip-links';
 
