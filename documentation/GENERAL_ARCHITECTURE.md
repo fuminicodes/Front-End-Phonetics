@@ -394,10 +394,11 @@ danger-500: #f81600     // Rojo
 |------------|--------|----------|-------|
 | Alert | ✅ | AA | 18/18 |
 | Skeleton | ✅ | AA | 26/26 |
+| SkipLinks | ✅ | A | 31/31 |
+| WavePlayer | ✅ | AA | 33/33 (5 accessibility) |
 | Button | ✅ | AA | - |
 | Card | ✅ | AA | - |
 | Input | ✅ | AA | - |
-| SkipLinks | ✅ | A | 31 (ajustes pendientes) |
 | Typography | ✅ | AA | - |
 
 ---
@@ -423,11 +424,12 @@ danger-500: #f81600     // Rojo
 ```
 ✅ Alert Component:         18/18 tests (100%)
 ✅ Skeleton Component:      26/26 tests (100%)
-✅ Keyboard Navigation:     21/23 tests (91%)
-✅ Focus Management:        23/25 tests (92%)
-⚠️  SkipLinks Component:    31 tests (ajustes pendientes)
+✅ SkipLinks Component:     31/31 tests (100%)
+✅ Keyboard Navigation:     23/23 tests (100%)
+✅ Focus Management:        25/25 tests (100%)
+✅ WavePlayer Component:    5/5 accessibility tests (100%)
 
-Total: 97/123 tests pasando (79%)
+Total Accessibility: 128/128 tests pasando (100%)
 ```
 
 ### Herramientas
@@ -479,14 +481,21 @@ Total: 97/123 tests pasando (79%)
 ### Estado Actual
 
 ```
-✅ 50 tests pasando
+✅ 235 tests pasando
 🔄 24 tests skipped (encryption - requieren entorno específico)
-📊 Total: 74 tests
+📊 Total: 259 tests
 
 Desglose:
 ✓ cn.test.ts                             25 tests
 ↓ encryption.test.ts                     24 tests (skipped)
 ✓ analyze-audio.use-case.test.ts         25 tests
+✓ WavePlayer integration tests           33 tests ✅ NEW
+✓ useWaveSurfer hook tests               29 tests ✅ NEW
+✓ Alert accessibility tests              18 tests
+✓ Skeleton accessibility tests           26 tests
+✓ SkipLinks accessibility tests          31 tests
+✓ Focus management tests                 25 tests
+✓ Keyboard navigation tests              23 tests
 ```
 
 ### Cobertura por Módulo
@@ -496,7 +505,13 @@ Desglose:
 | Utilidades (cn) | 25 | ✅ Pasando |
 | Encryption (JWE/JWT) | 24 | 🔄 Skipped |
 | Use Cases (phoneme) | 25 | ✅ Pasando |
-| Accesibilidad | 97 | ✅ 79% pasando |
+| **WavePlayer (component)** | **33** | **✅ Pasando** |
+| **useWaveSurfer (hook)** | **29** | **✅ Pasando** |
+| Alert (accessibility) | 18 | ✅ Pasando |
+| Skeleton (accessibility) | 26 | ✅ Pasando |
+| SkipLinks (accessibility) | 31 | ✅ Pasando |
+| Focus Management | 25 | ✅ Pasando |
+| Keyboard Navigation | 23 | ✅ Pasando |
 
 ### Herramientas de Testing
 
@@ -701,20 +716,17 @@ npm run build
 - [x] Módulo phoneme-analysis (domain + infrastructure + UI)
 - [x] Eliminación de API Routes deprecated (Diciembre 29, 2025)
 - [x] WavePlayer component con WaveSurfer.js (audio visualization)
+- [x] Tests completos de WavePlayer (62 tests - integration + unit)
+- [x] Tests de accesibilidad para todos los componentes (100%)
 
 ### 🔧 En Desarrollo
 
 - [ ] Tests de encryption (24 tests skipped)
-- [ ] Tests de SkipLinks (31 tests, ajustes menores)
 
 ### 📋 Pendiente (Prioridades)
 
 #### Alta Prioridad
-1. **Completar tests de accesibilidad**
-   - SkipLinks: 31 tests
-   - Alcanzar 100% de tests pasando
-
-2. **Tests de integración**
+1. **Tests de integración adicionales**
    - Server Actions
    - Flujos completos de usuario
    - E2E con Playwright
@@ -765,6 +777,7 @@ npm run build
 | [URL_STATE.md](./URL_STATE.md) | URL state con nuqs | ✅ Actualizado |
 | [SKIP_LINKS.md](./SKIP_LINKS.md) | Skip links component | ✅ Actualizado |
 | [ACCESSIBILITY_TESTING.md](./ACCESSIBILITY_TESTING.md) | Tests de accesibilidad | ✅ Actualizado |
+| [WAVEPLAYER_TESTING.md](./WAVEPLAYER_TESTING.md) | Tests de WavePlayer | ✅ Nuevo (Dic 29, 2025) |
 | [MIGRATION_COMPLETE.md](../MIGRATION_COMPLETE.md) | Migración a Server Actions | ✅ Completado |
 | [TESTING_SUMMARY.md](../TESTING_SUMMARY.md) | Resumen de testing | ✅ Actualizado |
 
