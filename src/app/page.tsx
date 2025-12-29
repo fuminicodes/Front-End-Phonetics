@@ -17,7 +17,7 @@ export default function DashboardPage() {
         
         {/* El componente renderizado */}
         <WavePlayer 
-          url="https://wavesurfer.xyz/wavesurfer-code/examples/audio/audio.wav" 
+          url="/sampleAudio.wav" 
           height={120}
         />
         
