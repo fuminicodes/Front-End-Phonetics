@@ -139,14 +139,14 @@ shared/
 │   ├── theme-toggle.tsx
 │   ├── user-menu.tsx
 │   └── audio/
-│       └── wave-player.tsx     # WaveSurfer.js wrapper
+│       └── wave-player.tsx     # ✅ WaveSurfer.js wrapper completo
 ├── hooks/
 │   ├── use-audio-recorder.ts   # Web Audio API hook
 │   ├── use-permission.ts       # RBAC client hook
 │   ├── use-permission.server.ts # RBAC server hook
 │   ├── use-session.ts          # Client-side session access
 │   ├── use-query-params.ts     # URL state with nuqs
-│   └── use-wavesurfer.ts       # Audio visualization
+│   └── use-wavesurfer.ts       # ✅ Audio visualization hook
 ├── utils/
 │   ├── cn.ts                   # Tailwind class merger
 │   ├── encryption.ts           # JWE/JWT con jose
@@ -162,6 +162,7 @@ shared/
 - Design System "Nebula Glass" con glassmorphism funcional
 - Componentes accesibles (WCAG 2.1 AA)
 - Hooks reutilizables para audio, permisos, sesión
+- Audio player completo con WaveSurfer.js (visualización de onda)
 - Utilidades de encriptación y validación
 
 #### 3. Modules (`src/modules/`)
@@ -194,10 +195,6 @@ modules/
 │       │   └── phoneme-analysis-page.tsx
 │       └── hooks/
 │           └── use-phoneme-analysis.ts
-└── wavesurfer/                 # 🔧 En desarrollo
-    ├── domain/
-    ├── infrastructure/
-    └── ui/
 ```
 
 **Responsabilidades:**
@@ -703,10 +700,10 @@ npm run build
 - [x] Validación de environment variables
 - [x] Módulo phoneme-analysis (domain + infrastructure + UI)
 - [x] Eliminación de API Routes deprecated (Diciembre 29, 2025)
+- [x] WavePlayer component con WaveSurfer.js (audio visualization)
 
 ### 🔧 En Desarrollo
 
-- [ ] Módulo wavesurfer (estructura creada, implementación pendiente)
 - [ ] Tests de encryption (24 tests skipped)
 - [ ] Tests de SkipLinks (31 tests, ajustes menores)
 
@@ -717,12 +714,7 @@ npm run build
    - SkipLinks: 31 tests
    - Alcanzar 100% de tests pasando
 
-2. **Implementar módulo wavesurfer**
-   - Domain layer
-   - Infrastructure layer
-   - UI components
-
-3. **Tests de integración**
+2. **Tests de integración**
    - Server Actions
    - Flujos completos de usuario
    - E2E con Playwright
