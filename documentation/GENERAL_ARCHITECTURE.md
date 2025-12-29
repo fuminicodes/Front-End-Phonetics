@@ -225,10 +225,8 @@ app/
 ├── proxy-test-sa/              # Página de test (Server Actions)
 ├── comparison-sa/              # Comparación Standard vs Direct
 ├── debug-sa/                   # Debug con logging detallado
-└── api/                        # ⚠️ API Routes deprecated
-    ├── phoneme-analysis/       # → Migrar a Server Actions
-    ├── phoneme-analysis-alt/   # → Migrar a Server Actions
-    └── debug-proxy/            # → Migrar a Server Actions
+└── api/                        # API Routes restantes
+    └── test-headers/           # Utilidad de testing
 ```
 
 ---
@@ -461,13 +459,13 @@ Total: 97/123 tests pasando (79%)
 | `registerAction()` | `app/auth/actions.ts` | Registro |
 | `logoutAction()` | `app/auth/actions.ts` | Logout |
 
-### API Routes Deprecated
+### API Routes Eliminadas
 
-⚠️ **Marcadas para eliminación**
+✅ **Migración completada - Diciembre 29, 2025**
 
-- `/api/phoneme-analysis` → `analyzeAudioAction()`
-- `/api/phoneme-analysis-alt` → `analyzeAudioDirectAction()`
-- `/api/debug-proxy` → `analyzeAudioDebugAction()`
+- ~~`/api/phoneme-analysis`~~ → `analyzeAudioAction()`
+- ~~`/api/phoneme-analysis-alt`~~ → `analyzeAudioDirectAction()`
+- ~~`/api/debug-proxy`~~ → `analyzeAudioDebugAction()`
 
 ### Beneficios Obtenidos
 
@@ -704,62 +702,57 @@ npm run build
 - [x] Logging con correlation IDs
 - [x] Validación de environment variables
 - [x] Módulo phoneme-analysis (domain + infrastructure + UI)
+- [x] Eliminación de API Routes deprecated (Diciembre 29, 2025)
 
 ### 🔧 En Desarrollo
 
 - [ ] Módulo wavesurfer (estructura creada, implementación pendiente)
 - [ ] Tests de encryption (24 tests skipped)
 - [ ] Tests de SkipLinks (31 tests, ajustes menores)
-- [ ] Completar migración de API Routes a Server Actions
 
 ### 📋 Pendiente (Prioridades)
 
 #### Alta Prioridad
-1. **Eliminar API Routes deprecated**
-   - `/api/phoneme-analysis`
-   - `/api/phoneme-analysis-alt`
-   - `/api/debug-proxy`
-
-2. **Completar tests de accesibilidad**
+1. **Completar tests de accesibilidad**
    - SkipLinks: 31 tests
    - Alcanzar 100% de tests pasando
 
-3. **Implementar módulo wavesurfer**
+2. **Implementar módulo wavesurfer**
    - Domain layer
    - Infrastructure layer
    - UI components
 
-4. **Tests de integración**
+3. **Tests de integración**
    - Server Actions
    - Flujos completos de usuario
    - E2E con Playwright
 
 #### Media Prioridad
-5. **Middleware real**
+4. **Middleware real**
    - Actualmente es `proxy.ts` (renombrar)
    - Implementar como middleware oficial de Next.js
 
-6. **Optimización de performance**
+5. **Optimización de performance**
    - Lazy loading de componentes
    - Image optimization
    - Code splitting mejorado
 
-7. **Internacionalización (i18n)**
+6. **Internacionalización (i18n)**
    - Soporte multi-idioma
    - next-intl o similar
 
-8. **Analytics**
+7. **Analytics**
    - Tracking de eventos
    - Métricas de uso
    - Error tracking (Sentry)
 
 #### Baja Prioridad
-9. **Documentación de usuario**
+8. **Documentación de usuario**
    - Guías de uso
    - Tutoriales
    - FAQ
 
-10. **CI/CD**
+9. **CI/CD**
     - GitHub Actions
     - Automated testing
     - Deployment pipelines
