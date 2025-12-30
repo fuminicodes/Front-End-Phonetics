@@ -46,7 +46,9 @@ export function useWaveSurfer({ containerRef, url, options }: UseWaveSurferProps
     // Capturar errores internos de WaveSurfer (ej. decodificación)
     ws.on('error', (err) => {
         console.warn('WaveSurfer internal error:', err);
-        setError(typeof err === 'string' ? err : 'Error al cargar audio');
+        // Guardar el error como string, ya sea directo o el mensaje del objeto
+        const errorMessage = typeof err === 'string' ? err : (err?.message || 'Error al cargar audio');
+        setError(errorMessage);
     });
 
     // --- Carga de Audio Robusta ---

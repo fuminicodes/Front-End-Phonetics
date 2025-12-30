@@ -69,6 +69,7 @@ export const WavePlayer = ({ url, className, height = 80 }: WavePlayerProps) => 
           onClick={togglePlay}
           disabled={!isReady}
           className="rounded-full w-12 h-12 shadow-lg shadow-primary-500/20"
+          aria-label={isPlaying ? 'Pausar audio' : 'Reproducir audio'}
         >
           {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" className="ml-1" />}
         </Button>

@@ -26,14 +26,23 @@
 
 ### 4. Test Results
 ```
-✅ 50 tests pasando
+✅ 235 tests pasando
 🔄 24 tests skipped (encryption - requieren entorno específico)
-📊 Total: 74 tests
+📊 Total: 259 tests
 
-Archivos:
-✓ src/shared/utils/__tests__/cn.test.ts (25 tests)
-↓ src/shared/utils/__tests__/encryption.test.ts (24 tests | skipped)
-✓ src/modules/phoneme-analysis/domain/use-cases/__tests__/analyze-audio.use-case.test.ts (25 tests)
+Desglose por Módulo:
+✓ WavePlayer Integration Tests              33 tests
+✓ useWaveSurfer Hook Tests                  29 tests
+✓ Alert Accessibility Tests                 18 tests
+✓ Skeleton Accessibility Tests              26 tests
+✓ SkipLinks Accessibility Tests             31 tests
+✓ Focus Management Tests                    25 tests
+✓ Keyboard Navigation Tests                 23 tests
+✓ cn utility Tests                          25 tests
+✓ Analyze Audio Use Case Tests              25 tests
+↓ Encryption Tests                          24 tests (skipped)
+
+Test Files: 9 passed | 1 skipped (10)
 ```
 
 ### 5. Build Status
